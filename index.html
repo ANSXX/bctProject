@@ -99,12 +99,34 @@
                         `;
                         productRow.append(productCard);
                     });
+
+                    // Add click event handler for Add to cart buttons
+                    $('.addToCartButton').click(function() {
+                        var productData = $(this).data('product');
+                        addToCart(productData);
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
                 }
             });
         });
+
+        // Function to add product to cart
+        function addToCart(productData) {
+            // Send product data to cart.php
+            $.ajax({
+                type: 'POST',
+                url: 'add_to_cart.php',
+                data: { product: productData },
+                success: function(response) {
+                    alert('Product added to cart!');
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
     </script>
 </body>
 </html>

@@ -1,20 +1,16 @@
 <?php
-
 session_start();
 
 
+$totalSum = 0;
+$totalItems = 0;
+
+
 if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    
     if(isset($_GET['delete'])) {
         $delete_index = $_GET['delete'];
-
-        
         unset($_SESSION['cart'][$delete_index]);
-
-        
         $_SESSION['cart'] = array_values($_SESSION['cart']);
-
-        
         header("Location: cart.php");
         exit();
     }
@@ -22,17 +18,13 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     echo "Your cart is empty.";
     exit();
 }
-
-
-$totalSum = 0;
-$totalItems = 0;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Shopping Cart</title>
     <style>
         body {
@@ -98,23 +90,34 @@ $totalItems = 0;
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($_SESSION['cart'] as $index => $item): ?>
-                <tr>
-                    <td><?php echo $index + 1; ?></td>
-                    <td><?php echo $item['name']; ?></td>
-                    <td><?php echo isset($item['description']) ? $item['description'] : 'Description not available'; ?></td>
-                    <td><?php echo '$' . $item['price']; ?></td>
-                    <td><a href="cart.php?delete=<?php echo $index; ?>">&#9747</a></td>
-                </tr>
-                <?php 
-                    $totalSum += $item['price'];
-                    $totalItems++;
-                ?>
-            <?php endforeach; ?>
+            <?php 
+            
+            if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $index => $item): ?>
+                    <tr>
+                        <td><?php echo $index + 1; ?></td>
+                        <td><?php echo $item['name']; ?></td>
+                        <td><?php echo isset($item['description']) ? $item['description'] : 'Description not available'; ?></td>
+                        <td><?php echo '$' . $item['price']; ?></td>
+                        <td><a href="cart.php?delete=<?php echo $index; ?>">&#9747</a></td>
+                    </tr>
+                    <?php 
+                        $totalSum += $item['price'];
+                        $totalItems++;
+                    ?>
+                <?php endforeach; 
+            } else {
+                
+                echo "<tr><td colspan='5'>Your cart is empty.</td></tr>";
+            }
+            ?>
         </tbody>
     </table>
     <div class="total">
         Total Items: <?php echo $totalItems; ?> | Total Price: $<?php echo $totalSum; ?>
+    </div>
+    <div>
+        <a href="pay.php" class="btn btn-secondary">Pay</a>
     </div>
 </body>
 </html>
