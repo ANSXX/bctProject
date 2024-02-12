@@ -1,0 +1,27 @@
+*{
+    font-family: "Inria Sans";
+    font-weight: 700;
+    font-style: italic;
+}
+body > nav {
+    display:grid;
+    grid-template-columns:auto auto;
+    align-items: start;
+    background-color:#2d57cacd ;
+    font-family: Inria sans;
+    font-weight: 900;
+    font-style:normal;
+    display: grid; 
+    grid-template-columns: auto auto;
+}
+/* body > nav > div{    
+   display: inline-block;
+} */
+img{
+    width:40px;
+    padding-top: 15px;
+}
+div>form{
+    /* width: 50%; */
+    height: 75%;
+}

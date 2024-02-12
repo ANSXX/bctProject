@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watches.co</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            font-family: "Inria Sans";
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        body > nav {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            align-items: start;
+            background-color: #2d57cacd;
+            font-family: Inria sans;
+            font-weight: 900;
+            font-style: normal;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            justify-content: space-between; /* Add this line to push the items to the sides */
+            padding: 10px; /* Add padding for better spacing */
+        }
+
+        img.cart-icon {
+            width: 40px;
+            height: 40px;
+            justify-self: end; /* Align to the end of the container */
+        }
+
+        div.navbar-container {
+            justify-self: start; /* Align to the start of the container */
+        }
+        div>button{
+            border: none;
+            background: none;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <button id="toggleButton" onclick="toggleRedirect()">logout</button>   
+        </div>
+        <div class="navbar-container">
+            <h1 class="navbar">Watches.co</h1>
+        </div>
+        <div> 
+            <a href="cart.php" class="ms-3">
+                <img src="cart.png" alt="Shopping Cart" class="cart-icon">
+            </a>
+        </div>
+    </nav>
+    <div class="container mt-5" id="productContainer">
+        <div class="row" id="productRow"></div>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var isLogin = false;
+
+        function toggleRedirect() {
+            var button = document.getElementById('toggleButton');
+            if (isLogin) {
+                button.textContent = 'logout';
+                window.location.href = 'logout.php';
+            } else {
+                button.textContent = 'login';
+                window.location.href = 'login.php';
+            }
+            isLogin = !isLogin;
+        }
+
+        // Load products from server on page load
+        $(document).ready(function() {
+            $.ajax({
+                type: 'GET',
+                url: 'get_product.php',
+                dataType: 'json', // Expect JSON response
+                success: function(products) {
+                    var productRow = $('#productRow');
+
+                    // Loop through products and generate HTML
+                    products.forEach(function(product) {
+                        var productCard = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="${product.image}" class="card-img-top" alt="Product Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${product.name}</h5>
+                                        <p class="card-text">Price: ₹${product.price}</p>
+                                        <button type="button" class="btn btn-primary addToCartButton" data-product='${JSON.stringify(product)}'>Add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        productRow.append(productCard);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
