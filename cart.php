@@ -1,20 +1,20 @@
 <?php
-// Start or resume the session
+
 session_start();
 
-// Check if the cart session variable exists and is not empty
+
 if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    // Check if a delete request is sent
+    
     if(isset($_GET['delete'])) {
         $delete_index = $_GET['delete'];
 
-        // Remove the item from the cart array using its index
+        
         unset($_SESSION['cart'][$delete_index]);
 
-        // Re-index the cart array to ensure consecutive keys
+        
         $_SESSION['cart'] = array_values($_SESSION['cart']);
 
-        // Redirect back to the cart page to reflect changes
+        
         header("Location: cart.php");
         exit();
     }
@@ -23,7 +23,7 @@ if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     exit();
 }
 
-// Calculate total sum and total number of items
+
 $totalSum = 0;
 $totalItems = 0;
 ?>

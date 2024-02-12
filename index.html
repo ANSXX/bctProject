@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watches.co</title>
-    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         * {
@@ -23,18 +22,18 @@
             font-style: normal;
             display: grid;
             grid-template-columns: auto auto auto;
-            justify-content: space-between; /* Add this line to push the items to the sides */
-            padding: 10px; /* Add padding for better spacing */
+            justify-content: space-between;
+            padding: 10px;
         }
 
         img.cart-icon {
             width: 40px;
             height: 40px;
-            justify-self: end; /* Align to the end of the container */
+            justify-self: end;
         }
 
         div.navbar-container {
-            justify-self: start; /* Align to the start of the container */
+            justify-self: start;
         }
         div>button{
             border: none;
@@ -61,7 +60,6 @@
         <div class="row" id="productRow"></div>
     </div>
 
-    <!-- Include jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         var isLogin = false;
@@ -78,16 +76,14 @@
             isLogin = !isLogin;
         }
 
-        // Load products from server on page load
         $(document).ready(function() {
             $.ajax({
                 type: 'GET',
                 url: 'get_product.php',
-                dataType: 'json', // Expect JSON response
+                dataType: 'json',
                 success: function(products) {
                     var productRow = $('#productRow');
 
-                    // Loop through products and generate HTML
                     products.forEach(function(product) {
                         var productCard = `
                             <div class="col-md-4 mb-4">

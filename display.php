@@ -1,5 +1,5 @@
 <?php
-// Start session
+
 session_start();
 ?>
 
@@ -10,11 +10,11 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watches.co</title>
     <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https:
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https:
+    <link rel="preconnect" href="https:
+    <link href="https:
     <style>
         * {
             font-family: "Inria Sans";
@@ -32,18 +32,18 @@ session_start();
             font-style: normal;
             display: grid;
             grid-template-columns: auto auto auto;
-            justify-content: space-between; /* Add this line to push the items to the sides */
-            padding: 10px; /* Add padding for better spacing */
+            justify-content: space-between;
+            padding: 10px;
         }
 
         img.cart-icon {
             width: 40px;
             height: 40px;
-            justify-self: end; /* Align to the end of the container */
+            justify-self: end;
         }
 
         div.navbar-container {
-            justify-self: start; /* Align to the start of the container */
+            justify-self: start;
         }
         div a{
             color: #000;
@@ -54,7 +54,7 @@ session_start();
     <nav>
         <div>
             <?php
-            // Check if user is logged in
+            
             if (isset($_SESSION['user_id'])) {
                 echo '<a href="logout.php"><h6>Logout</h6></a>';
             } else {
@@ -79,7 +79,7 @@ session_start();
     </div>
 
     <!-- Include jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https:
     <script>
         $(document).ready(function() {
             $('.addToCartButton').click(function() {
@@ -88,11 +88,11 @@ session_start();
 
                 $.ajax({
                     type: 'POST',
-                    url: 'add_to_cart.php', // Change this to the correct URL for adding to cart
+                    url: 'add_to_cart.php', 
                     data: formData,
 
                     error: function(xhr, status, error) {
-                        // Handle errors here
+                        
                         console.error(error);
                     }
                 });

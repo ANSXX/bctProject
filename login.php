@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Please</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 </head>
 <body>
@@ -17,7 +16,6 @@
                     </div>
                     <div class="card-body">
                         <?php
-                        // Check if there is an error message in the URL
                         if (isset($_GET['error'])) {
                             $errorMessage = $_GET['error'];
                             echo '<div class="alert alert-danger" role="alert">' . $errorMessage . '</div>';
