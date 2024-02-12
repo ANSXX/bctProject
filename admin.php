@@ -11,7 +11,6 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $productId = $_POST["productId"];
     $productName = $_POST["productName"];
     $productPrice = $_POST["productPrice"];
     $productDescription = $_POST["description"];
@@ -44,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $target_file)) {
             $sql = "INSERT INTO products (name, price, image, description) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sds", $productName, $productPrice, $target_file, $productDescription);
-            
+            $stmt->bind_param("sdss", $productName, $productPrice, $target_file, $productDescription);
+
             if ($stmt->execute()) {
                 echo "<script>alert('Product added successfully.')</script>";
             } else {
